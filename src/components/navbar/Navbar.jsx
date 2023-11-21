@@ -12,9 +12,10 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../config/FirebaseConfig/Firebaseconfig';
 
 const pages = ['Categories'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -35,7 +36,14 @@ function Navbar() {
     setAnchorElUser(null);
   };
 
-  
+  const logoutHandler = () => {
+    signOut(auth).then(() => {
+      // Sign-out successful.
+    }).catch((error) => {
+      // An error happened.
+    });
+    
+  }
 
   return (
     <AppBar position="static">
@@ -113,11 +121,11 @@ function Navbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+             
+                <MenuItem  onClick={logoutHandler}>
+                  <Typography textAlign="center">Logout</Typography>
                 </MenuItem>
-              ))}
+              
             </Menu>
           </Box>
         </Toolbar>

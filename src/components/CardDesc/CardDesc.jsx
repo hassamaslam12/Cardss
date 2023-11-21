@@ -7,7 +7,6 @@ import './CardDesc.css'
 
 const CardDesc = () => {
     const {id} = useParams();
-    // console.log(id);
 
     const [data,setData] = useState(null);
 
